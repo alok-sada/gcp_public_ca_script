@@ -117,7 +117,7 @@ certbot certonly \
   --manual \
   --preferred-challenges "dns-01" \
   --server $ACME_SERVER \
-  --csr "$public_folder/csr_$ENV.pem" \
+  --csr "$public_folder/csr_${ENV}.pem" \
   --cert-path "$public_folder/certificate_${ENV}.pem" \
   --key-path "$public_folder/private_${ENV}.key" \
   --force-renewal \
