@@ -111,7 +111,7 @@ else
     --agree-tos
 fi
 
-# Capture the output in a variable
+# Generate .pem files which will create Certificate, Intermediate CA chain and a Full certificate chain
 
 certbot certonly \
   --manual \
