@@ -191,4 +191,16 @@ Please deploy a DNS TXT record generated as part of above steps with the below d
 DNS TXT record under the name: _acme-challenge.xx.com. & with the following value: xxxxxxxxxxxxxx
 ```
 
-Automating SSL certificate management using Certbot and Google Cloud saves time and reduces the risk of errors. With the provided script, you can streamline the certificate registration
+Once this is updated, `Press Enter to Continue` and after a while you will below output.
+
+```
+Successfully received certificate.
+Certificate is saved at:            ~/gcp_public_ca_script/certificate.pem
+Intermediate CA chain is saved at:  ~/gcp_public_ca_script/0000_chain.pem
+Full certificate chain is saved at: ~/gcp_public_ca_script/0001_chain.pem
+This certificate expires on 20xx-xx-xx.
+```
+
+Automating SSL certificate management using Certbot and Google Cloud saves time and reduces the risk of errors. With the provided script, you can streamline the certificate registration.
+
+In this example, --rsa-key-size 4096 specifies the desired RSA key size, --keep-until-expiring ensures that the existing certificate is kept until it expires, and --force-renewal forces Certbot to renew the certificate regardless of its expiration date. Please note that renewing a certificate for a longer duration, such as 4 years, is not recommended by Let's Encrypt. You can remove those for default options.

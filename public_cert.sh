@@ -70,13 +70,13 @@ else
 fi
 
 # Create public folder if it doesn't exist
-public_folder="$PWD"
+public_folder=$ENV
 if [ ! -d "$public_folder" ]; then
     mkdir -p "$public_folder"
 fi
 
 # Generate private key and CSR and save in public folder
-openssl req -newkey rsa:2048 -nodes -keyout "$public_folder/private.key" -out "$public_folder/csr.pem" -subj "/C=$COUNTRY/ST=$STATE/L=$LOCALITY/O=$ORGANIZATION/OU=$ORG_UNIT/CN=$COMMON_NAME/emailAddress=$USER_EMAIL"
+openssl req -newkey rsa:4096 -nodes -keyout "$public_folder/private_${ENV}.key" -out "$public_folder/csr_${ENV}.pem" -subj "/C=$COUNTRY/ST=$STATE/L=$LOCALITY/O=$ORGANIZATION/OU=$ORG_UNIT/CN=$COMMON_NAME/emailAddress=$USER_EMAIL"
 
 # Create an external account key and capture the output
 key_output=$(gcloud alpha publicca external-account-keys create --format=json)
@@ -111,10 +111,14 @@ else
     --agree-tos
 fi
 
+# Capture the output in a variable
+
 certbot certonly \
   --manual \
   --preferred-challenges "dns-01" \
   --server $ACME_SERVER \
-  --csr "$public_folder/csr.pem" \
-  --cert-path "$public_folder/certificate.pem" \
-  --key-path "$public_folder/private.key"
+  --csr "$public_folder/csr_$ENV.pem" \
+  --cert-path "$public_folder/certificate_${ENV}.pem" \
+  --key-path "$public_folder/private_${ENV}.key" \
+  --force-renewal \
+  --rsa-key-size 4096
