@@ -119,13 +119,13 @@ Using OpenSSL, we generate a private key and CSR, which will be used in the cert
 
 ```bash
 # Create public folder if it doesn't exist
-public_folder="$PWD"
+public_folder="$ENV"
 if [ ! -d "$public_folder" ]; then
     mkdir -p "$public_folder"
 fi
 
 # Generate private key and CSR and save in public folder
-openssl req -newkey rsa:2048 -nodes -keyout "$public_folder/private.key" -out "$public_folder/csr.pem" -subj "/C=$COUNTRY/ST=$STATE/L=$LOCALITY/O=$ORGANIZATION/OU=$ORG_UNIT/CN=$COMMON_NAME/emailAddress=$USER_EMAIL"
+openssl req -newkey rsa:4096 -nodes -keyout "$public_folder/private_${ENV}.key" -out "$public_folder/csr_${ENV}.pem" -subj "/C=$COUNTRY/ST=$STATE/L=$LOCALITY/O=$ORGANIZATION/OU=$ORG_UNIT/CN=$COMMON_NAME/emailAddress=$USER_EMAIL"
 ```
 
 #### `Step 6:` Creating an External Account Key
