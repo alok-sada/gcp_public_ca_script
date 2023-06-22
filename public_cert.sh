@@ -122,3 +122,8 @@ certbot certonly \
   --key-path "$public_folder/private_${ENV}.key" \
   --force-renewal \
   --rsa-key-size 4096
+
+# moves the created .pem files in $ENV folder.  
+
+  mv 0000_chain.pem $public_folder/intermediate_cert_${ENV}.pem
+  mv 0001_chain.pem $public_folder/full_cert_${ENV}.pem
