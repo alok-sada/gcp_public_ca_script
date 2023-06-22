@@ -1,12 +1,16 @@
 #!/bin/bash
 
 # Load environment variables from .env file
+echo "------------------------------"
+echo "Loading .env file"
 source .env
 
 # Set project configuration
+echo "Setting project $PROJECT_ID"
 gcloud config set project $PROJECT_ID
 
 # Add IAM policy binding
+echo "Adding IAM Policy for user: $USER_EMAIL"
 if gcloud projects add-iam-policy-binding $PROJECT_ID \
     --member=user:$USER_EMAIL \
     --role=roles/publicca.externalAccountKeyCreator; then
