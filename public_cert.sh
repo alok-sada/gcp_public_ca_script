@@ -25,25 +25,25 @@ gcloud services enable publicca.googleapis.com
 if [[ "$OSTYPE" == "darwin"* ]]; then
   # macOS (brew)
   if command -v certbot &> /dev/null; then
-    echo "--------------------------"
+    echo "------------------------------"
     echo "Certbot already installed."
   else
-    echo "---------------------"
+    echo "------------------------------"
     echo "Installing Certbot..."
     brew install certbot
   fi
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   # Linux (apt-get)
   if command -v certbot &> /dev/null; then
-    echo "--------------------------"
+    echo "------------------------------"
     echo "Certbot already installed."
   else
-    echo "---------------------"
+    echo "------------------------------"
     echo "Installing Certbot..."
     sudo apt-get install certbot
   fi
 else
-  echo "-----------------------------"
+  echo "------------------------------"
   echo "Unsupported operating system."
   exit 1
 fi
@@ -64,7 +64,7 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
       sudo apt-get install openssl
   fi
 else
-  echo "-----------------------------"
+  echo "------------------------------"
   echo "Unsupported operating system."
   exit 1
 fi
@@ -124,6 +124,11 @@ certbot certonly \
   --rsa-key-size 4096
 
 # moves the created .pem files in $ENV folder.  
-
+  echo "----------------------------------------------"
+  echo "Renaming and moving the file to ${ENV} folder."
   mv 0000_chain.pem $public_folder/intermediate_cert_${ENV}.pem
   mv 0001_chain.pem $public_folder/full_cert_${ENV}.pem
+  
+# Script Complete.  
+  echo "----------------"
+  echo "Script Complete."
